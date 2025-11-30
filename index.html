@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Full Advanced Weather Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="fxCanvas"></canvas>
+
+<div class="wrap" id="app">
+  <header>
+    <div class="brand">
+      <div class="logo">W</div>
+      <div>
+        <h1>Weather — Advanced Dashboard</h1>
+        <div class="small">Animated, forecast, AQI, charts & effects</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="search card" style="padding:8px 10px;">
+        <input id="cityInput" placeholder="Enter city (e.g. Delhi)" />
+        <button class="btn" id="searchBtn">Search</button>
+      </div>
+
+      <button class="icon-btn" id="locBtn" title="Use device location">📍</button>
+      <button class="icon-btn" id="modeToggle" title="Toggle dark/light">🌙</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="left">
+      <div class="card" id="currentCard">
+        <div class="current">
+          <div class="current-left">
+            <div id="mainIcon" class="weather-icon"></div>
+            <div>
+              <div id="locLine" style="font-weight:700;font-size:18px">—</div>
+              <div id="localTime" class="small muted">—</div>
+              <div class="condition" id="conditionText">—</div>
+            </div>
+          </div>
+
+          <div style="text-align:right">
+            <div class="big-temp" id="tempMain">--°C</div>
+            <div class="small" id="feelsText">Feels: --°C</div>
+            <div class="small" id="windShort">Wind: --</div>
+          </div>
+        </div>
+
+        <div class="info-grid" style="margin-top:14px">
+          <div class="info-item">
+            <div style="font-size:13px;opacity:0.9">Humidity</div>
+            <div id="humidityVal" style="font-weight:700">--%</div>
+          </div>
+          <div class="info-item">
+            <div style="font-size:13px;opacity:0.9">Cloud</div>
+            <div id="cloudVal" style="font-weight:700">--%</div>
+          </div>
+          <div class="info-item">
+            <div style="font-size:13px;opacity:0.9">UV Index</div>
+            <div id="uvVal" style="font-weight:700">--</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card chart-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-weight:700">Hourly (24h)</div>
+          <div style="font-size:13px;opacity:0.85" id="chartSubtitle">Temperatures & humidity</div>
+        </div>
+        <canvas id="hourlyChart"></canvas>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-weight:700">3-Day Forecast</div>
+          <div style="font-size:13px;color:var(--muted)">WeatherAPI forecast</div>
+        </div>
+        <div class="forecast" id="forecastWrap"></div>
+      </div>
+    </section>
+
+    <aside class="right">
+      <div class="card widgets">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-weight:700">Air Quality & Wind</div>
+          <div style="font-size:13px;opacity:0.85" id="aqiLabel">AQI</div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:10px">
+          <svg class="gauge" id="aqiGauge" viewBox="0 0 100 100"></svg>
+          <svg class="compass" id="windCompass" viewBox="0 0 100 100"></svg>
+        </div>
+
+        <div style="display:flex;gap:8px;justify-content:space-between;margin-top:12px">
+          <div style="flex:1">
+            <div style="font-size:13px;opacity:0.85">Pressure</div>
+            <div id="pressureVal" style="font-weight:700">-- hPa</div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:13px;opacity:0.85">Visibility</div>
+            <div id="visVal" style="font-weight:700">-- km</div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:13px;opacity:0.85">Precip</div>
+            <div id="precipVal" style="font-weight:700">-- mm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating small stats -->
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-weight:700">Sunrise / Sunset</div>
+            <div style="font-size:13px;opacity:0.85" id="astroTimes">—</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:700" id="gustVal">Gust: -- kph</div>
+            <div style="font-size:13px;opacity:0.85" id="lastUpdated">Updated: --</div>
+          </div>
+        </div>
+        <div style="height:12px"></div>
+        <div style="display:flex;gap:8px;margin-top:6px">
+          <div class="small-icon" id="miniIcon"></div>
+          <div style="flex:1">
+            <div style="font-size:13px;opacity:0.8">Condition</div>
+            <div id="condShort" style="font-weight:700">—</div>
+          </div>
+        </div>
+      </div>
+
+      
+    </aside>
+  </main>
+
+  <footer>
+    Built with WeatherAPI • Key used in client request (you can proxy later). Tip: Allow location for auto search.
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
